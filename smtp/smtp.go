@@ -45,7 +45,7 @@ func Listen(cfg *config.Config, exitCh chan int) *net.TCPListener {
 		}
 
 		go Accept(
-			conn.(*net.TCPConn).RemoteAddr().String(),
+			conn.RemoteAddr().String(),
 			io.ReadWriteCloser(conn),
 			cfg.Storage,
 			cfg.MessageChan,
