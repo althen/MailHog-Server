@@ -34,6 +34,8 @@ func DefaultConfig() *Config {
 // Config is the config, kind of
 type Config struct {
 	SmtpSsl          bool
+	SmtpCert         string
+	SmtpKey          string
 	SMTPBindAddr     string
 	APIBindAddr      string
 	Hostname         string
@@ -66,7 +68,8 @@ type OutgoingSMTP struct {
 }
 
 var cfg = DefaultConfig()
-var Test = "ate"
+var Test = "ateee"
+
 // Jim is a monkey
 var Jim = &monkey.Jim{}
 
@@ -119,7 +122,9 @@ func Configure() *Config {
 
 // RegisterFlags registers flags
 func RegisterFlags() {
-	flag.BoolVar(&cfg.SmtpSsl, "smtp-ssl", false, "SMTP bind interface and port, e.g. 0.0.0.0:1025 or just :1025")
+	flag.BoolVar(&cfg.SmtpSsl, "smtp-ssl", false, "use ssl")
+	flag.StringVal(&cfg.SmtpCert, "ssl-cert", "", "")
+	flag.StringVal(&cfg.SmtpKey, "ssl-key", "", "")
 	flag.StringVar(&cfg.SMTPBindAddr, "smtp-bind-addr", envconf.FromEnvP("MH_SMTP_BIND_ADDR", "0.0.0.0:1025").(string), "SMTP bind interface and port, e.g. 0.0.0.0:1025 or just :1025")
 	flag.StringVar(&cfg.APIBindAddr, "api-bind-addr", envconf.FromEnvP("MH_API_BIND_ADDR", "0.0.0.0:8025").(string), "HTTP bind interface and port for API, e.g. 0.0.0.0:8025 or just :8025")
 	flag.StringVar(&cfg.Hostname, "hostname", envconf.FromEnvP("MH_HOSTNAME", "mailhog.example").(string), "Hostname for EHLO/HELO response, e.g. mailhog.example")
