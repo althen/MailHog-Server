@@ -66,7 +66,7 @@ type OutgoingSMTP struct {
 }
 
 var cfg = DefaultConfig()
-
+var Test = "ate"
 // Jim is a monkey
 var Jim = &monkey.Jim{}
 
