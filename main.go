@@ -9,7 +9,8 @@ import (
 	"github.com/ian-kent/go-log/log"
 	"github.com/mailhog/MailHog-Server/api"
 	"github.com/mailhog/MailHog-Server/config"
-	"github.com/mailhog/MailHog-Server/smtp"
+	//aconfig "github.com/althen/MailHog-Server/config"
+	"github.com/althen/MailHog-Server/smtp"
 	"github.com/mailhog/MailHog-UI/assets"
 	comcfg "github.com/mailhog/MailHog/config"
 	"github.com/mailhog/http"
@@ -29,6 +30,9 @@ func configure() {
 
 func main() {
 	configure()
+
+	log.Printf(">>>> %v", config.Test)
+	log.Printf(">>>> %v", conf.SmtpSsl)
 
 	if comconf.AuthFile != "" {
 		http.AuthFile(comconf.AuthFile)
